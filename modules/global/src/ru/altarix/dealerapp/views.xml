@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+
+    <view entity="dealerapp_CarMaker" name="maker-view" extends="_local">
+        <property name="country" view="_minimal"/>
+    </view>
+    <view entity="dealerapp_CarBrand" name="brand-with-maker" extends="_local">
+        <property name="carMaker" view="_minimal"/>
+    </view>
+    <view entity="dealerapp_CarBrand" name="carBrand-full" extends="brand-with-maker">
+        <property name="carConfigurations" view="_minimal"/>
+    </view>
+    <view entity="dealerapp_CarConfiguration" name="config-with-brand" extends="_local">
+        <property name="carBrand" view="_minimal"/>
+    </view>
+    <view entity="dealerapp_Car" name="car-view" extends="_local">
+        <property name="carMaker" view="_minimal"/>
+        <property name="carBrand" view="_minimal"/>
+        <property name="carConfiguration" view="_minimal"/>
+    </view>
+    <view entity="dealerapp_Request" name="request-view" extends="_local">
+        <property name="car" view="car-view"/>
+        <property name="contractor" view="_minimal"/>
+        <property name="manager" view="_minimal"/>
+    </view>
+
+    <view entity="dealerapp_Manager" name="manager.browse" extends="_local">
+        <property name="group" view="_minimal"/>
+        <property name="country" view="_minimal"/>
+    </view>
+    <view entity="dealerapp_Manager" name="manager.edit" extends="_local">
+        <property name="group">
+            <property name="name"/>
+        </property>
+        <property name="userRoles" view="user.edit"/>
+        <property name="substitutions" view="user.edit"/>
+        <property name="country" view="_minimal"/>
+    </view>
+</views>
