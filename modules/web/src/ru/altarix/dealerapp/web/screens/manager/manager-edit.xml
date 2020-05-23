@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        xmlns:ext="http://schemas.haulmont.com/cuba/window-ext.xsd"
+        extends="/com/haulmont/cuba/gui/app/security/user/edit/user-edit.xml"
+        messagesPack="ru.altarix.dealerapp.web.screens.manager">
+
+    <!--    https://github.com/cuba-platform/sample-extensions/blob/master/modules/web/src/com/company/sample/web/extuser/ext-user-edit.xml-->
+    <dsContext>
+        <datasource id="userDs" class="ru.altarix.dealerapp.entity.user.Manager" view="manager.edit"/>
+        <collectionDatasource id="countriesDs"
+                              class="ru.altarix.dealerapp.entity.Country"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from dealerapp_Country e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+
+
+    <layout>
+        <groupBox id="propertiesBox">
+            <grid id="propertiesGrid">
+                <rows>
+                    <row id="propertiesRow">
+                        <fieldGroup id="fieldGroupRight">
+                            <column>
+                                <field id="country" optionsDatasource="countriesDs"/>
+                            </column>
+                        </fieldGroup>
+                    </row>
+                </rows>
+            </grid>
+        </groupBox>
+    </layout>
+</window>

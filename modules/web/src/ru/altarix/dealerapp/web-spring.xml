@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2008-2020 Haulmont.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:gui="http://schemas.haulmont.com/cuba/spring/cuba-gui.xsd">
+
+    <!-- Annotation-based beans -->
+    <context:component-scan base-package="ru.altarix.dealerapp"/>
+    
+    <gui:screens base-packages="ru.altarix.dealerapp.web"/>
+    <bean id="dealerapp_proxyCreator" class="com.haulmont.cuba.web.sys.remoting.WebRemoteProxyBeanCreator">
+        <property name="serverSelector" ref="cuba_ServerSelector"/>
+        <property name="remoteServices">
+            <map>
+                <entry key="dealerapp_CarBrandComputingService"
+                       value="ru.altarix.dealerapp.service.CarBrandComputingService"/>
+                <entry key="dealerapp_CarMakerInitValuesDefiningService"
+                       value="ru.altarix.dealerapp.service.CarMakerInitValuesDefiningService"/>
+                <entry key="dealerapp_ContractorDataComputingService"
+                       value="ru.altarix.dealerapp.service.ContractorDataComputingService"/>
+                <entry key="dealerapp_GroupByDataLoaderService"
+                       value="ru.altarix.dealerapp.service.GroupByDataLoaderService"/>
+            </map>
+        </property>
+    </bean>
+
+</beans>
