@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://browseCaption"
+        focusComponent="personTable"
+        messagesPack="ru.altarix.dealerapp.web.screens.person">
+    <data readOnly="true">
+        <collection id="personsDc"
+                    class="ru.altarix.dealerapp.entity.contractor.Person"
+                    view="_local">
+            <loader id="personDl">
+                <query>
+                    <![CDATA[select e from dealerapp_Person e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="personTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="personTable"
+                dataLoader="personDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="personTable"
+                    width="100%"
+                    dataContainer="personsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+                <action id="excel" type="excel">
+                    <properties>
+                        <property name="fileName" value="person"/>
+                    </properties>
+                </action>
+            </actions>
+            <columns>
+                <column id="phone">
+                    <formatter class="ru.altarix.dealerapp.web.formatter.PhoneFormatter"/>
+                </column>
+                <column id="firstName"/>
+                <column id="lastName"/>
+                <column id="reqCount" caption="msg://reqCount"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="personTable.create"/>
+                <button id="editBtn" action="personTable.edit"/>
+                <button id="removeBtn" action="personTable.remove"/>
+                <button id="excelBtn" action="personTable.excel"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

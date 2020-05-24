@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="ru.altarix.dealerapp.web.screens.car">
+    <data>
+        <instance id="carDc"
+                  class="ru.altarix.dealerapp.entity.car.Car"
+                  view="car-view">
+            <loader id="carDl"/>
+        </instance>
+        <collection id="makers" class="ru.altarix.dealerapp.entity.car.CarMaker" view="_minimal">
+            <loader id="makerDl">
+                <query>
+                    select e from dealerapp_CarMaker e
+                </query>
+            </loader>
+        </collection>
+
+        <collection id="carBrandsDc" class="ru.altarix.dealerapp.entity.car.CarBrand" view="carBrand-full">
+            <loader id="carBrandsDl">
+                <query><![CDATA[select e from dealerapp_CarBrand e where e.carMaker = :maker]]></query>
+            </loader>
+        </collection>
+
+        <collection id="carConfigurationsDc" class="ru.altarix.dealerapp.entity.car.CarConfiguration" view="_local">
+            <loader id="carConfigurationsDl">
+                <query><![CDATA[select e from dealerapp_CarConfiguration e where e.carBrand = :brand]]></query>
+            </loader>
+        </collection>
+
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="carDc">
+            <column width="250px">
+                <lookupPickerField id="makerField" property="carMaker" optionsContainer="makers"/>
+                <lookupPickerField id="carBrandField" property="carBrand" optionsContainer="carBrandsDc"/>
+                <lookupPickerField  id="carConfigurationField" property="carConfiguration" optionsContainer="carConfigurationsDc"/>
+                <maskedField id="yearField" property="year" mask="####" valueMode="masked"/>
+                <field id="priceField" property="price"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

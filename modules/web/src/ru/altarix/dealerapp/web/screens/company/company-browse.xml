@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://browseCaption"
+        focusComponent="companyTable"
+        messagesPack="ru.altarix.dealerapp.web.screens.company">
+    <data readOnly="true">
+        <collection id="companyDc"
+                    class="ru.altarix.dealerapp.entity.contractor.Company"
+                    view="_local">
+            <loader id="companyDl">
+                <query>
+                    <![CDATA[select e from dealerapp_Company e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="companyTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="companyTable"
+                dataLoader="companyDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="companyTable"
+                    width="100%"
+                    dataContainer="companyDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+                <action id="excel" type="excel">
+                    <properties>
+                        <property name="fileName" value="companies"/>
+                    </properties>
+                </action>
+            </actions>
+            <columns>
+                <column id="phone">
+                    <formatter class="ru.altarix.dealerapp.web.formatter.PhoneFormatter"/>
+                </column>
+                <column id="title"/>
+                <column id="inn"/>
+                <column id="address"/>
+                <column id="reqCount" caption="msg://reqCount"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="companyTable.create"/>
+                <button id="editBtn" action="companyTable.edit"/>
+                <button id="removeBtn" action="companyTable.remove"/>
+                <button id="excelBtn" action="companyTable.excel"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

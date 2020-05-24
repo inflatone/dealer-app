@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="ru.altarix.dealerapp.web.screens.request">
+    <data>
+        <instance id="requestDc"
+                  class="ru.altarix.dealerapp.entity.request.Request"
+                  view="request-view">
+            <loader/>
+        </instance>
+
+        <collection id="carsDc" class="ru.altarix.dealerapp.entity.car.Car">
+            <view extends="car-view"/>
+            <loader id="carsDl">
+                <query>
+                    <![CDATA[select e from dealerapp_Car e]]>
+                </query>
+            </loader>
+        </collection>
+
+        <collection id="managersDc" class="ru.altarix.dealerapp.entity.user.Manager">
+            <view extends="_local"/>
+            <loader id="managersDl">
+                <query>
+                    <![CDATA[select e from dealerapp_Manager e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="requestDc">
+            <column width="250px">
+                <lookupPickerField id="carField" property="car"/>
+                <lookupPickerField id="personField" property="contractor"/>
+                <checkBox id="paidField" property="paid"/>
+                <lookupPickerField id="managerField" property="manager" optionsContainer="managersDc"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>
