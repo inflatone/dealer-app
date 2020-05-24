@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="ru.altarix.dealerapp.web.screens.configuration">
+    <data>
+        <instance id="carConfigurationDc"
+                  class="ru.altarix.dealerapp.entity.car.CarConfiguration"
+                  view="config-with-brand">
+            <loader/>
+        </instance>
+
+        <collection id="brands" class="ru.altarix.dealerapp.entity.car.CarBrand" view="_base">
+            <loader>
+                <query>
+                    select e from dealerapp_CarBrand e
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="carConfigurationDc">
+            <column width="250px">
+                <textField id="nameField" property="name"/>
+                <textField id="priceField" property="price"/>
+                <lookupField id="carTypeField" property="carType"/>
+                <textField id="commentField" property="comment"/>
+                <lookupPickerField id="carBrandField" property="carBrand" optionsContainer="brands"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

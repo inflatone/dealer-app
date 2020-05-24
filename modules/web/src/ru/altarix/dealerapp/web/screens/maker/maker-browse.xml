@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://browseCaption"
+        focusComponent="makersTable"
+        messagesPack="ru.altarix.dealerapp.web.screens.maker">
+    <data readOnly="true">
+        <collection id="makersDc"
+                    class="ru.altarix.dealerapp.entity.car.CarMaker"
+                    view="maker-view">
+            <loader id="makersDl">
+                <query>
+                    <![CDATA[select e from dealerapp_CarMaker e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="makersTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="makersTable"
+                dataLoader="makersDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="makersTable"
+                    width="100%"
+                    dataContainer="makersDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="code"/>
+                <column id="country"/>
+                <column id="brandCount"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="makersTable.create"/>
+                <button id="editBtn" action="makersTable.edit"/>
+                <button id="removeBtn" action="makersTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="ru.altarix.dealerapp.web.screens.brand">
+    <data>
+        <instance id="carBrandDc"
+                  class="ru.altarix.dealerapp.entity.car.CarBrand"
+                  view="carBrand-full">
+            <loader/>
+        </instance>
+        <collection id="makers" class="ru.altarix.dealerapp.entity.car.CarMaker" view="_minimal">
+            <loader>
+                <query>
+                    select e from dealerapp_CarMaker e
+                </query>
+            </loader>
+        </collection>
+        <collection id="carConfigurationsDc" class="ru.altarix.dealerapp.entity.car.CarConfiguration" view="_local">
+            <loader id="carConfigurationsDl">
+                <query><![CDATA[select e from dealerapp_CarConfiguration e where e.carBrand = :brand]]></query>
+            </loader>
+        </collection>
+
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="carBrandDc">
+            <column width="250px">
+                <textField id="nameField" property="name"/>
+                <lookupPickerField property="carMaker" optionsContainer="makers"/>
+            </column>
+        </form>
+        <groupBox id="carConfigurationsBox" caption="msg://ru.altarix.dealerapp.entity.car/CarBrand.carConfigurations">
+            <table id="carConfigurationsTable" dataContainer="carConfigurationsDc" width="100%" height="200px">
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="name"/>
+                    <column id="price"/>
+                    <column id="carType"/>
+                    <column id="comment"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="carConfigurationsTable.create"/>
+                    <button action="carConfigurationsTable.edit"/>
+                    <button action="carConfigurationsTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>
