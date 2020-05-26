@@ -34,8 +34,10 @@
                        value="ru.altarix.dealerapp.service.CarMakerInitValuesDefiningService"/>
                 <entry key="dealerapp_ContractorDataComputingService"
                        value="ru.altarix.dealerapp.service.ContractorDataComputingService"/>
-                <entry key="dealerapp_GroupByDataLoaderService"
-                       value="ru.altarix.dealerapp.service.GroupByDataLoaderService"/>
+                <entry key="dealerapp_CarMakerBrandCountLoadingService"
+                       value="ru.altarix.dealerapp.service.CarMakerBrandCountLoadingService"/>
+                <entry key="dealerapp_ContractorNameLoadingService"
+                       value="ru.altarix.dealerapp.service.ContractorNameLoadingService"/>
             </map>
         </property>
     </bean>

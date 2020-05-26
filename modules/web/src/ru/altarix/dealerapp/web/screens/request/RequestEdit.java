@@ -12,7 +12,7 @@ import ru.altarix.dealerapp.entity.contractor.Contractor;
 import ru.altarix.dealerapp.entity.contractor.Person;
 import ru.altarix.dealerapp.entity.request.Request;
 import ru.altarix.dealerapp.service.ContractorNameComputingService;
-import ru.altarix.dealerapp.web.SecurityUtils;
+import ru.altarix.dealerapp.web.Utils;
 import ru.altarix.dealerapp.service.CarNameComputingService;
 
 import javax.inject.Inject;
@@ -42,12 +42,12 @@ public class RequestEdit extends StandardEditor<Request> {
     private LookupPickerField<Contractor> personField;
 
     @Inject
-    private SecurityUtils securityUtils;
+    private Utils utils;
 
     @Subscribe
     public void onInitEntity(InitEntityEvent<Request> event) {
         Request entity = event.getEntity();
-        entity.setManager(securityUtils.getAuthUser());
+        entity.setManager(utils.getAuthUser());
     }
 
     @Subscribe
