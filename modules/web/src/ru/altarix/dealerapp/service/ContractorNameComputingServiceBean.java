@@ -2,7 +2,7 @@ package ru.altarix.dealerapp.service;
 
 import org.springframework.stereotype.Component;
 import ru.altarix.dealerapp.entity.contractor.Contractor;
-import ru.altarix.dealerapp.web.Utils;
+import ru.altarix.dealerapp.web.EntityUtils;
 
 import javax.inject.Inject;
 import java.util.Collection;
@@ -15,11 +15,11 @@ public class ContractorNameComputingServiceBean implements ContractorNameComputi
     private ContractorNameLoadingService contractorNameLoadingService;
 
     @Inject
-    private Utils utils;
+    private EntityUtils entityUtils;
 
     @Override
     public void pasteTransientNames(Collection<? extends Contractor> people) {
-        Map<UUID, String> names = contractorNameLoadingService.loadContractorNames(utils.retrieveUuids(people));
+        Map<UUID, String> names = contractorNameLoadingService.loadContractorNames(entityUtils.retrieveUuids(people));
         people.forEach(p ->
                 p.setName(names.getOrDefault(p.getId(), "UNKNOWN")));
     }

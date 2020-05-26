@@ -2,7 +2,7 @@ package ru.altarix.dealerapp.service;
 
 import org.springframework.stereotype.Component;
 import ru.altarix.dealerapp.entity.car.CarMaker;
-import ru.altarix.dealerapp.web.Utils;
+import ru.altarix.dealerapp.web.EntityUtils;
 
 import javax.inject.Inject;
 import java.util.Collection;
@@ -15,11 +15,11 @@ public class CarMakerTransientValuesComputingServiceBean implements CarMakerTran
     private CarMakerBrandCountLoadingService carMakerBrandCountLoadingService;
 
     @Inject
-    private Utils utils;
+    private EntityUtils entityUtils;
 
     @Override
     public void pasteCarBrandCounts(Collection<? extends CarMaker> makers) {
-        Map<UUID, Long> counts = carMakerBrandCountLoadingService.loadCarBrandCountsPerCarMaker(utils.retrieveUuids(makers));
+        Map<UUID, Long> counts = carMakerBrandCountLoadingService.loadCarBrandCountsPerCarMaker(entityUtils.retrieveUuids(makers));
         makers.forEach(m -> m.setBrandCount(counts.getOrDefault(m.getUuid(), 0L)));
     }
 }

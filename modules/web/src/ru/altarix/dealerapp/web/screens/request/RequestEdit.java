@@ -11,9 +11,9 @@ import ru.altarix.dealerapp.entity.contractor.Company;
 import ru.altarix.dealerapp.entity.contractor.Contractor;
 import ru.altarix.dealerapp.entity.contractor.Person;
 import ru.altarix.dealerapp.entity.request.Request;
-import ru.altarix.dealerapp.service.ContractorNameComputingService;
-import ru.altarix.dealerapp.web.Utils;
 import ru.altarix.dealerapp.service.CarNameComputingService;
+import ru.altarix.dealerapp.service.ContractorNameComputingService;
+import ru.altarix.dealerapp.web.EntityUtils;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -42,12 +42,12 @@ public class RequestEdit extends StandardEditor<Request> {
     private LookupPickerField<Contractor> personField;
 
     @Inject
-    private Utils utils;
+    private EntityUtils entityUtils;
 
     @Subscribe
     public void onInitEntity(InitEntityEvent<Request> event) {
         Request entity = event.getEntity();
-        entity.setManager(utils.getAuthUser());
+        entity.setManager(entityUtils.getAuthUser());
     }
 
     @Subscribe
@@ -65,6 +65,4 @@ public class RequestEdit extends StandardEditor<Request> {
             carField.setOptionsList(cars);
         });
     }
-
-
 }
