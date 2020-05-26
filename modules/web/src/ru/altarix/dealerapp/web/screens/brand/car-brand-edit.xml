@@ -36,7 +36,11 @@
             <table id="carConfigurationsTable" dataContainer="carConfigurationsDc" width="100%" height="200px">
                 <actions>
                     <action id="create" type="create"/>
-                    <action id="edit" type="edit"/>
+                    <action id="edit" type="edit">
+                        <properties>
+                            <property name="openMode" value="DIALOG"/>
+                        </properties>
+                    </action>
                     <action id="remove" type="remove"/>
                 </actions>
                 <columns>
@@ -46,7 +50,7 @@
                     <column id="comment"/>
                 </columns>
                 <buttonsPanel>
-                    <button action="carConfigurationsTable.create"/>
+                    <button id="createConfigurationButton" action="carConfigurationsTable.create"/>
                     <button action="carConfigurationsTable.edit"/>
                     <button action="carConfigurationsTable.remove"/>
                 </buttonsPanel>

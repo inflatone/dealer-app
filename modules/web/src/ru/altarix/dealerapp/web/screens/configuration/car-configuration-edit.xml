@@ -13,7 +13,7 @@
         <collection id="brands" class="ru.altarix.dealerapp.entity.car.CarBrand" view="_base">
             <loader>
                 <query>
-                    select e from dealerapp_CarBrand e
+                    <![CDATA[select e from dealerapp_CarBrand e]]>
                 </query>
             </loader>
         </collection>
